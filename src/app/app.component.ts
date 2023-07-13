@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from './services/shop/toastr.service';
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-root',
@@ -16,3 +18,4 @@ export class AppComponent {
   }
 }
  
+$.get("https://localhost:7013/api/Products", data=>{ console.log(data); });
