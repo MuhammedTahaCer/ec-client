@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from './services/shop/toastr.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'client';
+  constructor(private m: CustomToastrService) {
+    m.toastmessage('hello', 'friend', {
+      type: ToastrMessageType.Success, position: ToastrPosition.BR
+    });
+  }
 }
+ 
