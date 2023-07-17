@@ -8,6 +8,7 @@ import { ShopModule } from './shop/shop.module';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,8 +23,11 @@ import { NgxSpinnerModule } from "ngx-spinner";
     AppRoutingModule,
     AdminModule, 
     ShopModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: "baseUrl", useValue: "https://localhost:7013/api", multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
