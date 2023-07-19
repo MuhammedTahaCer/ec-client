@@ -3,7 +3,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, spinnerType } from 'src/app/base/base.component';
 
 @Component({
-  selector: 'app-products',
+  selector: 'shop-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })

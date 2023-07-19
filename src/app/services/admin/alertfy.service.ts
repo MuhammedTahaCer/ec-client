@@ -32,7 +32,7 @@ export class AlertfyService {
 export class AlertOperation {
   type: MessageType = MessageType.Message;
   position: MessagePosition = MessagePosition.BL;
-  delay: number = 5;
+  delay: number = 3;
   dismiss: boolean = false;
 }
 
