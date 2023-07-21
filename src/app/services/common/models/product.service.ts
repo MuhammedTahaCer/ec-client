@@ -33,9 +33,10 @@ export class ProductService {
   }
 
   //api dan data dönemsini bekleyen; lsit komponente dataya erecek olan işlem
-  async read(successCallback:()=> void , errorCallback?: (errorMessage: string) => void): Promise<List_Product[]> {
-    const firstValueFrom: any = this.httpClient.get<List_Product[]>({ //await yaptığımda callbak şlemleri yapamam. Bi const bağlıyorum
-      controller: "products"
+  async read(page: number = 0, size: number=5, successCallback:()=> void , errorCallback?: (errorMessage: string) => void): Promise< {totalCount: number; products:List_Product[]} > {
+    const firstValueFrom: any = this.httpClient.get< {totalCount: number; products:List_Product[]} >({ //await yaptığımda callbak şlemleri yapamam. Bi const bağlıyorum
+      controller: "products",
+      queryString: `page=${page}&size${size}`
       }); // veri geleceğini,
 
     firstValueFrom.then( d => successCallback() ) // verinin işeneceğii

@@ -21,18 +21,28 @@ export class ListComponent extends BaseComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginate: MatPaginator
 
- async ngOnInit() {
+  async getMyProducts(){
     this.showSpinner(spinnerType.Atom);
-    let allProducts: List_Product[]  = await this.productService.read(()=>this.hideSpinner(spinnerType.Atom), errorMessage => this.alerty.message(errorMessage,{
+    let allProducts: {totalCount: number; products:List_Product[]}  = await this.productService.read( this.paginate ? this.paginate.pageIndex:0, this.paginate ? this.paginate.pageSize:5 , ()=> this.hideSpinner(spinnerType.Atom), errorMessage => this.alerty.message(errorMessage,{
        type: MessageType.Error,
        position: MessagePosition.BC,
-       dismiss: false
+       dismiss: false,
     }
-    )); // read promise data olarak List_Product[] bekliyor. Bunu data source'a göndermeliyim. Promise olduğu için await ile karşılamalıyım. Artık onit void olamaz 
+    )) // read promise data olarak List_Product[] bekliyor. Bunu data source'a göndermeliyim. Promise olduğu için await ile karşılamalıyım. Artık onit void olamaz 
 
-    this.dataSource = new MatTableDataSource<List_Product>(allProducts); // paginator implement istiyor.
+    this.dataSource = new MatTableDataSource<List_Product>(allProducts.products); // paginator implement istiyor.
     this.dataSource.paginator = this.paginate
-
+    // this.paginate.length = allProducts.totalCount
   }
+
+  async pageChanged(){ //from list.component.html
+    await this.getMyProducts();
+  }
+
+ async ngOnInit() {
+  await this.getMyProducts()  
+}
+
+//create edilen veri aynı zamanda listeyi güncellesin istiyorsam bir outpu yazıyorum: create.component.ts
 
 }

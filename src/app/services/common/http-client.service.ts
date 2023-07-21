@@ -83,6 +83,7 @@ export class HttpClientService {
 export class RequestParameters{
   controller?: string;
   action?: string;
+  queryString?: string;
   headers?: HttpHeaders;
   baseUrl?: string; //baseurlim değişeceği durumlarda kullanma ihtimali
   fullEndPoint?: string; //dış kaynaklar için

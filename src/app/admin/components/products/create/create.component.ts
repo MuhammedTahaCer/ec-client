@@ -18,6 +18,8 @@ export class CreateComponent extends BaseComponent implements OnInit {
 
   }
 
+  @Output() created:EventEmitter<Create_Product> = new EventEmitter() //creatin kullandığı ana componenet hangisi; product componenet; create tetiklendiğinde bir event fılatıcaz -> products component'e / dışarıya. (EventEmitter) Ordan bir fonksiyon tetiklemek için viewchart kullanılıyor.
+
   ngOnInit(): void {
   }
   
@@ -35,7 +37,7 @@ export class CreateComponent extends BaseComponent implements OnInit {
       this.productService.create(createProduct, () => {
           this.hideSpinner(spinnerType.Atom);
           this.alerty.message("Ürün başarıyla eklenmiştir.", { dismiss: false, type: MessageType.Succuess, position: MessagePosition.BC });
-
+          this.createdProduct.emit(createProduct); // output'a creati işaret eden(selector) componenete gönderiyorum . product.component.html
           this.createdProduct.emit(createProduct);
       }, errorMessage => {
       // console.log()

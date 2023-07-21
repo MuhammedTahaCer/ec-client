@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, spinnerType } from 'src/app/base/base.component';
 import { Create_Product } from 'src/app/contracts/create_product';
 import { HttpClientService } from 'src/app/services/common/http-client.service';
+import { ListComponent } from './list/list.component';
 
 @Component({
   selector: 'app-products',
@@ -12,6 +13,11 @@ import { HttpClientService } from 'src/app/services/common/http-client.service';
 export class ProductsComponent extends BaseComponent implements OnInit {
   constructor( spinner: NgxSpinnerService, private httpclient: HttpClientService){
     super(spinner);
+  }
+
+  @ViewChild(ListComponent) listcommponents: ListComponent; // viewbag gibi istediğim bir selectorü çekebiliyorum
+  createdProduct(createdProduct: Create_Product){
+    this.listcommponents.getMyProducts() //birden fazla componenet ile derinlemesine veri akışı için redux kodlanabilir
   }
 
   ngOnInit(): void { 
