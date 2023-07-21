@@ -34,14 +34,14 @@ export class ProductService {
 
   //api dan data dönemsini bekleyen; lsit komponente dataya erecek olan işlem
   async read(successCallback:()=> void , errorCallback?: (errorMessage: string) => void): Promise<List_Product[]> {
-  const firstValueFrom: any = this.httpClient.get<List_Product[]>({ //await yaptığımda callbak şlemleri yapamam. Bi const bağlıyorum
+    const firstValueFrom: any = this.httpClient.get<List_Product[]>({ //await yaptığımda callbak şlemleri yapamam. Bi const bağlıyorum
       controller: "products"
-    }); // veri geleceğini,
+      }); // veri geleceğini,
 
     firstValueFrom.then( d => successCallback() ) // verinin işeneceğii
       .catch( (error : HttpErrorResponse) =>errorCallback(error.message) ) // sonrasında await ile verinin metoda ulaşacağını
 
-     return await firstValueFrom; 
+     return await firstValueFrom;  /* *** aseknron veri işleme mantığı B. 21 dk 22-28 arası *** */
   }
 
 }
